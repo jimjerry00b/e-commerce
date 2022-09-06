@@ -20,11 +20,50 @@
       <link href="{{ asset('assets/css/style.css')}}" rel="stylesheet" />
       <!-- responsive style -->
       <link href="{{ asset('assets/css/responsive.css')}}" rel="stylesheet" />
+       <style type="text/css">
+           .top_section{background: #f7444e; color: #fff;}
+           .top_section ul li a{color: #fff;}
+           .top_section ul li a:hover{color: #fff; text-decoration: underline;}
+       </style>
       @livewireStyles
    </head>
    <body>
          <!-- <div class="hero_area"> -->
          <!-- header section strats -->
+         <section class="top_section" style="">
+             <div class="container">
+                 <div class="row">
+                     <div class="col-lg-4"></div>
+                     <div class="col-lg-8">
+                         <ul class="nav justify-content-center float-right">
+                             
+                              @if(Route::has('login'))
+                                 @auth
+                                    @if(Auth::user()->utype === 'ADM')
+                                    <li class="nav-item"><a class="nav-link" href="{{route('login')}}">My Account ({{Auth::user()->utype}})</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{route('admin.dashboard')}}">Dashboard</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+                                    <form id="logout-form" method="POST" action="{{route('logout')}}">
+                                       @csrf
+                                    </form>
+                                    @else
+                                    <li class="nav-item"><a class="nav-link" href="{{route('login')}}">My Account ({{Auth::user()->utype}})</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{route('user.dashboard')}}">Dashboard</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+                                    <form id="logout-form" method="POST" action="{{route('logout')}}">
+                                       @csrf
+                                    </form>
+                                    @endif
+                                 @else
+                                 <li class="nav-item"><a class="nav-link" href="{{route('login')}}">Login</a></li>
+                                 <li class="nav-item"><a class="nav-link" href="{{route('register')}}">Register</a></li>
+                                 @endif
+                              @endif
+                         </ul>
+                     </div>
+                 </div>
+             </div>
+         </section>
          <header class="header_section">
                <div class="container">
                <nav class="navbar navbar-expand-lg custom_nav-container ">
@@ -47,9 +86,7 @@
                            <li class="nav-item">
                            <a class="nav-link" href="/shop">Shop</a>
                            </li>
-                           <li class="nav-item">
-                           <a class="nav-link" href="/card">Card</a>
-                           </li>
+
                            <li class="nav-item">
                            <a class="nav-link" href="/checkout">Checkout</a>
                            </li>
@@ -57,7 +94,7 @@
                            <a class="nav-link" href="">Contact</a>
                            </li>
                            <li class="nav-item">
-                           <a class="nav-link" href="#">
+                           <a class="nav-link" href="/card">
                               <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                                  <g>
                                        <g>
